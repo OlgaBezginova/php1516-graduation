@@ -38,12 +38,9 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
 
-    public function getNameAttribute()
+    public function orders()
     {
-        return  $this->firstname . ' ' . $this->lastname;
+        $this->hasMany(Order::class);
     }
 }
