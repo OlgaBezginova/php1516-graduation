@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $title ?? 'Laravel Homework' }}</title>
+    <title>{{ $title ?? 'Laravel Graduation' }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/styles.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
@@ -23,6 +23,21 @@
                 <li>
                     <a href="{{ route('users.list') }}"{!! Route::currentRouteName() == 'users.list' ? ' class="active"' : '' !!}>Users</a>
                 </li>
+                @auth
+                    <li>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('login-page') }}">Login</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('register-page') }}">Register</a>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>
@@ -33,14 +48,31 @@
         <div class="row">
             <div class="col-12">
                 <div class="site-heading">
-                    <h1>{{ $h1 ?? 'Laravel Homework' }}</h1>
+                    <h1>{{ $h1 ?? 'Laravel Graduation' }}</h1>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+
 <div class="container">
+    @if (\Session::has('success'))
+        <div class="alert alert-success">
+            <ul>
+                <li>{!! \Session::get('success') !!}</li>
+            </ul>
+        </div>
+    @endif
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     {{ $slot }}
 </div>
 
