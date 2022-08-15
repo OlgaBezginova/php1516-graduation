@@ -96,6 +96,6 @@ class AuthController extends Controller
 
     public function verify()
     {
-        
+
     }
 }

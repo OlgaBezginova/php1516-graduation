@@ -16,11 +16,19 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::factory()->create();
+        $users = User::factory()->count(3)->create();
 
-        Order::factory()
-            ->for($user)
-            ->hasAttached(Product::factory()->count(3), ['quantity' => rand(1,5)])
-            ->create();
+        foreach ($users as $user) {
+
+            $quantity = rand(1,5);
+            $price = rand(100,10000)/100;
+
+            Order::factory()
+                ->for($user)
+                ->hasAttached(Product::factory()->count(3), ['quantity' => $quantity, 'price' => $price])
+                ->create();
+        }
+
+
     }
 }
