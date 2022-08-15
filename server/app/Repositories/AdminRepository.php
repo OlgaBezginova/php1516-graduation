@@ -10,7 +10,7 @@ class AdminRepository
 
     public function list()
     {
-
+        return Admin::get();
     }
 
     public function byId($id)
@@ -29,6 +29,11 @@ class AdminRepository
         $admin->save();
 
         return $admin;
+    }
+
+    public function getByToken($token)
+    {
+        return Admin::where('email_verification_token', $token)->first();
     }
 
 }

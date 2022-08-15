@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\OrderApiController;
+use App\Http\Controllers\Api\ProductApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+    Route::get('/products', [ProductApiController::class, 'products']);
+    Route::get('/products/{product_id}', [ProductApiController::class, 'product']);
+    Route::get('/orders', [OrderApiController::class, 'orders']);
+    Route::get('/order/{order_id}', [OrderApiController::class, 'order']);
+    Route::put('/orders/', [OrderApiController::class, 'create']);
+
+
+
+

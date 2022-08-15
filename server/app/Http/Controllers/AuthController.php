@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Components\Auth\AdminStatus;
+use App\Events\AdminRegistered;
 use App\Repositories\AdminRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,7 +16,7 @@ class AuthController extends Controller
     public function login()
     {
         if (Auth::check()) {
-            return redirect()->intended(route('home'));
+            return redirect(route('home'));
         }
 
         return view('login');
@@ -66,7 +68,7 @@ class AuthController extends Controller
     public function register()
     {
         if (Auth::check()) {
-            return redirect()->intended(route('home'));
+            return redirect(route('home'));
         }
 
         return view('register');
@@ -87,6 +89,7 @@ class AuthController extends Controller
 
         try {
             $admin = $adminRepository->create($data);
+            AdminRegistered::dispatch($admin);
         } catch (Exception $e){
 
         }
@@ -94,8 +97,18 @@ class AuthController extends Controller
         return redirect()->back()->with('success', 'Thank you for registration! Please check your email for confirmation link');
     }
 
-    public function verify()
-    {
 
+    public function verify(Request $request, AdminRepository $adminRepository)
+    {
+        if (!$admin = $adminRepository->getByToken($request->get('token'))) {
+            return 'Token does not exist';
+        }
+
+        if (empty($admin->email_verified)) {
+            $admin->email_verified = Carbon::now();
+            $admin->save();
+        }
+
+        return redirect(route('home'))->with('success', 'Email confirmed! Your account will be activated soon.');
     }
 }
