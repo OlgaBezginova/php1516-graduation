@@ -14,8 +14,18 @@
     </x-slot>
 
     <x-slot name="filters">
-        <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
+        <form class="navbar-form navbar-right filters">
+            <input type="text" name="name" class="form-control" placeholder="Name">
+            <input type="text" name="email" class="form-control" placeholder="Email">
+            <select name="status" class="form-control">
+                <option value="">Status</option>
+                @foreach($statuses as $status)
+                 <option value="{{ $status }}"></option>
+                @endforeach
+               {{-- <option value="2">New</option>
+                <option value="3">Disabled</option>--}}
+            </select>
+            <button type="submit">Filter</button>
         </form>
     </x-slot>
 

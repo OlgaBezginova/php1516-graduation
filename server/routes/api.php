@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Route;
     Route::post('/login', [UserAuthApiController::class, 'login']);
 
     Route::get('/products', [ProductApiController::class, 'products']);
+    Route::get('/products/{product_id}', [ProductApiController::class, 'product']);
 
     Route::middleware('auth.api')->group(function(){
-        Route::get('/products/{product_id}', [ProductApiController::class, 'product']);
         Route::get('/orders', [OrderApiController::class, 'orders']);
         Route::get('/order/{order_id}', [OrderApiController::class, 'order']);
         Route::put('/orders', [OrderApiController::class, 'create']);

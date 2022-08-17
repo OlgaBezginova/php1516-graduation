@@ -9,7 +9,12 @@ class AdminController extends Controller
 {
     public function index(AdminRepository $adminRepository)
     {
-        return view('admins.list', ['admins' => $adminRepository->list()]);
+      //  dd($adminRepository->getStatuses());
+
+        return view('admins.list', [
+            'admins' => $adminRepository->list(),
+            'statuses' => $adminRepository->getStatuses(),
+        ]);
     }
 
     public function view()

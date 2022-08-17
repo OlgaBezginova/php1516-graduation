@@ -163,8 +163,24 @@ body.msb-x .msb {
   transform-style: preserve-3d;
 }
 
-.alert {
+.inbox .alert {
     margin: 25px;
+}
+form.filters button {
+    height: 34px;
+}
+.dropdown-menu button {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+    background: none!important;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /* Slide in animation */

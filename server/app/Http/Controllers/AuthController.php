@@ -109,6 +109,6 @@ class AuthController extends Controller
             $admin->save();
         }
 
-        return redirect(route('home'))->with('success', 'Email confirmed! Your account will be activated soon.');
+        return redirect(route('login-page'))->with('success', 'Email confirmed! Your account will be activated soon.');
     }
 }

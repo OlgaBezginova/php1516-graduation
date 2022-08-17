@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 
 use App\Models\Admin;
+use Illuminate\Support\Facades\DB;
 
 class AdminRepository
 {
@@ -34,6 +35,11 @@ class AdminRepository
     public function getByToken($token)
     {
         return Admin::where('email_verification_token', $token)->first();
+    }
+
+    public function getStatuses()
+    {
+        return Admin::distinct()->pluck('status');
     }
 
 }
