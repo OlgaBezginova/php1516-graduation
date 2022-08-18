@@ -37,9 +37,8 @@ class AdminRepository
         return Admin::where('email_verification_token', $token)->first();
     }
 
-    public function getStatuses()
+    public function delete(Admin $admin)
     {
-        return Admin::distinct()->pluck('status');
+        $admin->delete();
     }
-
 }

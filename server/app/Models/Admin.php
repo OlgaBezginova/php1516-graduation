@@ -10,15 +10,4 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Admin extends Authenticatable
 {
     use HasFactory;
-
-    public function getStatusAttribute($value){
-        $status = [
-            AdminStatus::ACTIVE => 'Active',
-            AdminStatus::NEW => 'New',
-            AdminStatus::DISABLED => 'Disabled',
-        ];
-
-        return $status[$value];
-    }
-
 }

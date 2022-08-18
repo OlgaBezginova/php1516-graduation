@@ -19,11 +19,9 @@
             <input type="text" name="email" class="form-control" placeholder="Email">
             <select name="status" class="form-control">
                 <option value="">Status</option>
-                @foreach($statuses as $status)
-                 <option value="{{ $status }}"></option>
+                @foreach($statuses as $value=>$status)
+                 <option value="{{ $value }}">{{ $status }}</option>
                 @endforeach
-               {{-- <option value="2">New</option>
-                <option value="3">Disabled</option>--}}
             </select>
             <button type="submit">Filter</button>
         </form>
@@ -39,7 +37,30 @@
             <td></td>
             <td></td>
         </tr>
-        @each('admins.list-item', $admins, 'admin')
+        @foreach($admins as $admin)
+            <div>
+                <tr>
+                    <td>
+                        <a href="{{ route('admins.admin', ['id' => $admin->id]) }}">
+                <span>
+                    {{ $admin->name }}
+                </span>
+                        </a>
+                    </td>
+                    <td>{{ $admin->email }}</td>
+                    <td>{{ $admin->email_verified }}</td>
+                    <td><span>{{ $statuses[$admin->status] }}</span></td>
+                    <td><a href="{{ route('admins.update', ['id' => $admin->id]) }}">Edit</a></td>
+                    <td>
+                        <form action="{{ route('admins.delete', ['id' => $admin->id]) }}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" @if(auth()->id() == $admin->id) disabled @endauth>Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            </div>
+        @endforeach
         </tbody>
     </table>
 </x-layout>

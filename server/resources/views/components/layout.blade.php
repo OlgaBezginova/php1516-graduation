@@ -68,17 +68,17 @@
                     <div class="inbox-sb"></div>
                     <div class="inbox-bx container-fluid">
                         <div class="row">
+                            <div class="col-12">
+                                <x-alert></x-alert>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-2">
                                 {{ $sidebar ?? ''  }}
                             </div>
                             <div class="col-md-10">
                                 <h1>{{ $h1 ?? 'Laravel Graduation' }}</h1>
                                 {{ $slot }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12">
-                                <x-alert></x-alert>
                             </div>
                         </div>
                     </div>

@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+
 Route::middleware('auth')->group(function() {
     Route::get('/', [MainController::class, 'index'])->name('home');
 
@@ -54,8 +57,8 @@ Route::middleware('auth')->group(function() {
 
     Route::prefix('admins')->name('admins.')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('list');
-        Route::get('/{id}', [AdminController::class, 'view'])->name('admin');
         Route::get('/add', [AdminController::class, 'add'])->name('add');
+        Route::get('/{id}', [AdminController::class, 'view'])->name('admin');
         Route::get('/{id}/update', [AdminController::class, 'update'])->name('update');
         Route::put('/', [AdminController::class, 'create'])->name('create');
         Route::post('/{id}', [AdminController::class, 'edit'])->name('edit');
