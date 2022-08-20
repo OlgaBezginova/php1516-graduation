@@ -50,7 +50,7 @@
                     <td>{{ $admin->email }}</td>
                     <td>{{ $admin->email_verified }}</td>
                     <td><span>{{ $statuses[$admin->status] }}</span></td>
-                    <td><a href="{{ route('admins.edit', ['id' => $admin->id]) }}">Edit</a></td>
+                    <td><a href="{{ route('admins.edit', ['id' => $admin->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a></td>
                     <td>
                         @if(auth()->id() != $admin->id)
                             <form action="{{ route('admins.delete', ['id' => $admin->id]) }}" method="post">
