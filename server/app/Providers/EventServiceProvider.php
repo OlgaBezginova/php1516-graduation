@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Events\AdminDeleted;
 use App\Events\AdminRegistered;
+use App\Events\AdminStatusChanged;
 use App\Listeners\SendAdminConfirmationEmail;
 use App\Listeners\SendAdminDeletedEmailListener;
+use App\Listeners\SendAdminStatusChangedEmailListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -27,6 +29,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         AdminDeleted::class => [
             SendAdminDeletedEmailListener::class,
+        ],
+        AdminStatusChanged::class => [
+            SendAdminStatusChangedEmailListener::class,
         ],
     ];
 

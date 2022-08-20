@@ -4,14 +4,45 @@ namespace App\Repositories;
 
 
 use App\Models\Admin;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class AdminRepository
 {
+    private $name;
+    private $email;
+    private $status;
+
+    public function setNameFilter($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function setEmailFilter($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function setStatusFilter($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
 
     public function list()
     {
-        return Admin::get();
+        return Admin::when($this->name, function ($query){
+            $query->where('name', 'LIKE', '%' . $this->name . '%');
+        })->when($this->email, function ($query){
+            $query->where('email', $this->email);
+        })->when($this->status, function ($query){
+            $query->where('status', $this->status);
+        })->get();
     }
 
     public function byId($id)

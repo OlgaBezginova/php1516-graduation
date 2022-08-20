@@ -19,7 +19,7 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ route('admins.update', ['id' => auth()->user()->id]) }}">Settings</a></li>
+                            <li><a href="{{ route('admins.edit', ['id' => auth()->user()->id]) }}">Settings</a></li>
                             <li role="separator" class="divider"></li>
                             <li>
                                 <form action="{{ route('logout') }}" method="post">@csrf<button type="submit">Logout</button></form>
@@ -77,8 +77,14 @@
                                 {{ $sidebar ?? ''  }}
                             </div>
                             <div class="col-md-10">
-                                <h1>{{ $h1 ?? 'Laravel Graduation' }}</h1>
-                                {{ $slot }}
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h1>{{ $h1 ?? 'Laravel Graduation' }}</h1>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    {{ $slot }}
+                                </div>
                             </div>
                         </div>
                     </div>

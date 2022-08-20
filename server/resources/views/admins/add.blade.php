@@ -9,7 +9,7 @@
 
     <x-slot name="sidebar">
         <ul>
-            <li><a href="{{ route('admins.list') }}">< Back</a></li>
+            <li><a href="{{ route('admins.list') }}">< All admins</a></li>
         </ul>
     </x-slot>
     <div class="col-sm-6">

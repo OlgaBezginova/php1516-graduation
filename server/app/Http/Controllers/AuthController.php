@@ -29,20 +29,11 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
+        $credentials['status'] = AdminStatus::ACTIVE;
 
-            if (!Auth::user()->email_verified) {
-                return back()->withErrors([
-                    'email_verified' => 'Email is not verified'
-                ]);
-            }
-
-            if (Auth::user()->status !== AdminStatus::ACTIVE) {
-                return back()->withErrors([
-                    'status' => 'Profile is not active'
-                ]);
-            }
-
+        if (Auth::attemptWhen($credentials, function ($admin) {
+            return $admin->isVerified();
+        })) {
             Auth::logoutOtherDevices($credentials['password']);
 
             $request->session()->regenerate();
@@ -51,7 +42,9 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => 'The provided credentials do not matched our records.'
+            'email' => 'The provided credentials do not matched our records.',
+            'status' => 'Profile is not active',
+            'email_verified' => 'Email is not verified'
         ]);
     }
 

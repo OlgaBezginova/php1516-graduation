@@ -15,12 +15,12 @@
 
     <x-slot name="filters">
         <form class="navbar-form navbar-right filters">
-            <input type="text" name="name" class="form-control" placeholder="Name">
-            <input type="text" name="email" class="form-control" placeholder="Email">
+            <input type="text" name="name" class="form-control" placeholder="Name" value="{{ request('name') }}">
+            <input type="text" name="email" class="form-control" placeholder="Email" value="{{ request('email') }}">
             <select name="status" class="form-control">
                 <option value="">Status</option>
                 @foreach($statuses as $value=>$status)
-                 <option value="{{ $value }}">{{ $status }}</option>
+                 <option value="{{ $value }}" @if(request('status') == $value) selected @endif>{{ $status }}</option>
                 @endforeach
             </select>
             <button type="submit">Filter</button>
@@ -50,13 +50,15 @@
                     <td>{{ $admin->email }}</td>
                     <td>{{ $admin->email_verified }}</td>
                     <td><span>{{ $statuses[$admin->status] }}</span></td>
-                    <td><a href="{{ route('admins.update', ['id' => $admin->id]) }}">Edit</a></td>
+                    <td><a href="{{ route('admins.edit', ['id' => $admin->id]) }}">Edit</a></td>
                     <td>
-                        <form action="{{ route('admins.delete', ['id' => $admin->id]) }}" method="post">
-                            @csrf
-                            @method('delete')
-                            <button type="submit" @if(auth()->id() == $admin->id) disabled @endauth>Delete</button>
-                        </form>
+                        @if(auth()->id() != $admin->id)
+                            <form action="{{ route('admins.delete', ['id' => $admin->id]) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit">Delete</button>
+                            </form>
+                        @endauth
                     </td>
                 </tr>
             </div>
