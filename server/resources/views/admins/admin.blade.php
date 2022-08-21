@@ -18,7 +18,7 @@
             <hr>
             <strong>Verified at: </strong><span>{{ $admin->email_verified }}</span>
             <hr>
-            <strong>Status: </strong><span>{{ \App\Components\Auth\AdminStatus::all()[$admin->status] }}</span>
+            <strong>Status: </strong><span>{{ $admin->status }}</span>
             <hr>
         </div>
     </div>

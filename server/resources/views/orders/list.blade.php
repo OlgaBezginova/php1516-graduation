@@ -23,7 +23,7 @@
         <tbody>
         <tr>
             <td><b>Order ID</b></td>
-            <td><b>User</b></td>
+            <td><b>Customer</b></td>
             <td><b>Quantity</b></td>
             <td><b>Total</b></td>
             <td><b>Status</b></td>
@@ -44,8 +44,8 @@
                         </a>
                     </td>
                     <td><span>{{ $order->total_quantity }}</span></td>
-                    <td><span>{{ $order->total_price }}</span></td>
-                    <td><span>{{ $statuses[$order->status] }}</span></td>
+                    <td><span>{{ $order->total_price }} $</span></td>
+                    <td><span>{{ $order->status }}</span></td>
                     <td><span>{{ $order->created_at }}</span></td>
                     <td><a href="{{ route('orders.order', ['id' => $order->id]) }}">Details</a></td>
                     <td><a href="{{ route('orders.edit', ['id' => $order->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a></td>

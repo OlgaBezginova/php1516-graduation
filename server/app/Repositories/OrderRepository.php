@@ -21,7 +21,7 @@ class OrderRepository
                  orders.user_id,
                  orders.created_at,
                  sum(order_product.quantity) as total_quantity,
-                 sum(order_product.price) as total_price,
+                 sum(order_product.price*order_product.quantity) as total_price,
                  users.name as user_name,
                  users.email')
             ->groupBy('orders.id');

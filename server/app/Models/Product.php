@@ -13,4 +13,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Order::class)->withPivot('quantity');
     }
+
+    public function getTitleAttribute($value)
+    {
+        return ucfirst($value);
+    }
 }

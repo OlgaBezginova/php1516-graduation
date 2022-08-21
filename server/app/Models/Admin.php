@@ -15,4 +15,9 @@ class Admin extends Authenticatable
     {
         return !empty($this->email_verified);
     }
+
+    public function getStatusAttribute($value)
+    {
+        return AdminStatus::all()[$value];
+    }
 }

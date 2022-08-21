@@ -20,7 +20,7 @@
             <select name="status" class="form-control">
                 <option value="">Status</option>
                 @foreach($statuses as $value=>$status)
-                 <option value="{{ $value }}" @if(request('status') == $value) selected @endif>{{ $status }}</option>
+                    <option value="{{ $value }}" @if(request('status') == $value) selected @endif>{{ $status }}</option>
                 @endforeach
             </select>
             <button type="submit">Filter</button>
@@ -49,7 +49,7 @@
                     </td>
                     <td>{{ $admin->email }}</td>
                     <td>{{ $admin->email_verified }}</td>
-                    <td><span>{{ $statuses[$admin->status] }}</span></td>
+                    <td><span>{{ $admin->status }}</span></td>
                     <td><a href="{{ route('admins.edit', ['id' => $admin->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a></td>
                     <td>
                         @if(auth()->id() != $admin->id)

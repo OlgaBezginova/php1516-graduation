@@ -1,4 +1,7 @@
 <x-main-layout>
+    <x-slot name="title">
+        {{ $title }}
+    </x-slot>
     <!-- partial:index.partial.html -->
     <nav class="mnb navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Components\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,5 +18,10 @@ class Order extends Model
     public function products()
     {
         return $this->belongsToMany(Product::class)->withPivot('quantity');
+    }
+
+    public function getStatusAttribute($value)
+    {
+        return OrderStatus::all()[$value];
     }
 }

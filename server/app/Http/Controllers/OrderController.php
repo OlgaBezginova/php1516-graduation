@@ -10,11 +10,21 @@ class OrderController extends Controller
 {
     public function index(Request $request, OrderRepository $orderRepository)
     {
-        $orders = $orderRepository->list();
+        return view('orders.list', [
+            'orders' => $orderRepository->list(),
+            'statuses' => OrderStatus::all(),
+        ]);
+    }
 
-        $statuses = OrderStatus::all();
-
-        return view('orders.list', ['orders' => $orders, 'statuses' => $statuses]);
+    public function show($id, OrderRepository $orderRepository)
+    {
+        if (!$order = $orderRepository->byId($id)) {
+            abort(404);
+        }
+        return view('orders.order', [
+            'order' => $order,
+            'products' => $orderRepository->productsList($order->id),
+        ]);
     }
 
 }
