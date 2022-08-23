@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Components\OrderStatus;
 use App\Repositories\OrderRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -24,6 +25,14 @@ class OrderController extends Controller
         return view('orders.order', [
             'order' => $order,
             'products' => $orderRepository->productsList($order->id),
+        ]);
+    }
+
+    public function add(UserRepository $userRepository)
+    {
+        return view('orders.add', [
+            'statuses' => OrderStatus::all(),
+            'users' => $userRepository->list(),
         ]);
     }
 

@@ -20,15 +20,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-
 Route::middleware('auth')->group(function() {
     Route::get('/', [MainController::class, 'index'])->name('home');
 
     Route::prefix('orders')->name('orders.')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('list');
-        Route::get('/{id}', [OrderController::class, 'show'])->name('order');
         Route::get('/add', [OrderController::class, 'add'])->name('add');
+        Route::get('/{id}', [OrderController::class, 'show'])->name('order');
         Route::get('/{id}/edit', [OrderController::class, 'edit'])->name('edit');
         Route::put('/', [OrderController::class, 'create'])->name('create');
         Route::post('/{id}', [OrderController::class, 'update'])->name('update');

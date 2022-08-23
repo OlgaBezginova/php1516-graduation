@@ -166,7 +166,7 @@ body.msb-x .msb {
 .inbox .alert {
     margin: 25px;
 }
-form.filters button {
+form.filters button, form.add-order button{
     height: 34px;
 }
 .dropdown-menu button {
