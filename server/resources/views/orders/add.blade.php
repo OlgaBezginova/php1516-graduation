@@ -38,10 +38,9 @@
                 <div class="form-row">
                     <div class="form-group col-md-9">
                         <select name="products[]" class="form-control">
-                            <option value="">User</option>
-                            @foreach($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }}</option>
-                            @endforeach
+                            <option value="">Product 1</option>
+                            <option value="">Product 2</option>
+                            <option value="">Product 3</option>
                         </select>
                     </div>
                     <div class="form-group col-md-2">
